@@ -1,25 +1,20 @@
 import Link from "next/link";
+import ThemeToggler from "./ThemeToggler";
 
 export default function Navbar() {
+
   return (
-    <nav className="bg-gray-900 text-white px-6 py-4 flex justify-between items-center shadow-md">
-      {/* Logo */}
+    <nav className="px-6 py-8 mb-6 flex justify-between items-center rounded-lg">
       <Link href="/" className="text-2xl font-bold">
         myQ
       </Link>
-
-      {/* Navigation Links */}
       <div className="flex space-x-6">
-        <Link href="/" className="hover:text-blue-400 transition-colors">
-          Home
-        </Link>
         <Link href="/generate" className="hover:text-blue-400 transition-colors">
-          About
+          Generate
         </Link>
-        <Link href="/contact" className="hover:text-blue-400 transition-colors">
-          Contact
-        </Link>
+        <ThemeToggler/>
       </div>
+        
     </nav>
   );
 }

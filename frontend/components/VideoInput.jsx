@@ -6,7 +6,6 @@ export default function VideoInput() {
   const [videoLink, setVideoLink] = useState("");
   const [videoFile, setVideoFile] = useState(null);
   const [transcript,setTranscript] = useState("");
-  // true = link mode, false = file mode
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
