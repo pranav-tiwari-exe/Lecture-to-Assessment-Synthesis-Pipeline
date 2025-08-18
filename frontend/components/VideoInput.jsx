@@ -63,15 +63,7 @@ export default function VideoInput() {
             />
           </div>
         
-          <div>
-            <label className="block text-gray-700 mb-2">Upload MP4 File</label>
-            <input
-              type="file"
-              accept="video/mp4"
-              onChange={handleFileChange}
-              className="w-full p-2 border rounded-lg"
-            />
-          </div>
+  
     
 
         {/* Switch Button */}
