@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "generated_at": "2025-08-22T00:07:04.874396",
+    "total_mcqs": 8,
+    "generator_version": "Enhanced_2.0",
+    "improvements": [
+      "T5-base model for better question quality",
+      "RoBERTa-based QA for enhanced validation",
+      "Semantic chunking for better context",
+      "Multi-strategy distractor generation",
+      "Advanced preprocessing and cleaning"
+    ]
+  },
+  "statistics": {
+    "total_mcqs": 8,
+    "difficulty_distribution": {
+      "Easy": 8,
+      "Medium": 0,
+      "Hard": 0
+    },
+    "question_type_distribution": {
+      "General": 1,
+      "Factual": 6,
+      "Temporal": 1
+    },
+    "average_confidence": 0.818,
+    "min_confidence": 0.429,
+    "max_confidence": 0.978
+  },
+  "mcqs": [
+    {
+      "question": "What is AI concerned with building?",
+      "options": {
+        "A": "smart machines",
+        "B": "Google",
+        "C": "AlphaGo",
+        "D": "The Turing Test"
+      },
+      "correct_answer": "A",
+      "explanation": "The correct answer is 'smart machines' based on the context provided.",
+      "confidence": 0.856,
+      "difficulty": "Easy",
+      "question_type": "Factual"
+    },
+    {
+      "question": "What does AI typically require?",
+      "options": {
+        "A": "The Turing Test",
+        "B": "human intelligence",
+        "C": "Google",
+        "D": "Alan Turing"
+      },
+      "correct_answer": "B",
+      "explanation": "The correct answer is 'human intelligence' based on the context provided.",
+      "confidence": 0.945,
+      "difficulty": "Easy",
+      "question_type": "Factual"
+    },
+    {
+      "question": "What is a broad-ranging branch of computer science concerned with building smart machines?",
+      "options": {
+        "A": "Artificial intelligence",
+        "B": "The Turing Test",
+        "C": "Lee Sedol"
+      },
+      "correct_answer": "A",
+      "explanation": "The correct answer is 'Artificial intelligence' based on the context provided.",
+      "confidence": 0.649,
+      "difficulty": "Easy",
+      "question_type": "Factual"
+    },
+    {
+      "question": "When was the term AI first coined?",
+      "options": {
+        "A": "ML",
+        "B": "five",
+        "C": "AlphaGo",
+        "D": "the"
+      },
+      "correct_answer": "D",
+      "explanation": "The correct answer is 'the' based on the context provided.",
+      "confidence": 0.96,
+      "difficulty": "Easy",
+      "question_type": "Temporal"
+    },
+    {
+      "question": "What conference was the birth of AI?",
+      "options": {
+        "A": "AlphaGo",
+        "B": "Google",
+        "C": "Dartmouth"
+      },
+      "correct_answer": "C",
+      "explanation": "The correct answer is 'Dartmouth' based on the context provided.",
+      "confidence": 0.768,
+      "difficulty": "Easy",
+      "question_type": "Factual"
+    },
+    {
+      "question": "What does ML stand for?",
+      "options": {
+        "A": "Alan Turing",
+        "B": "Machine learning",
+        "C": "Google"
+      },
+      "correct_answer": "B",
+      "explanation": "The correct answer is 'Machine learning' based on the context provided.",
+      "confidence": 0.955,
+      "difficulty": "Easy",
+      "question_type": "Factual"
+    },
+    {
+      "question": "What is another name for machine learning?",
+      "options": {
+        "A": "One",
+        "B": "AI",
+        "C": "first",
+        "D": "ML"
+      },
+      "correct_answer": "D",
+      "explanation": "The correct answer is 'ML' based on the context provided.",
+      "confidence": 0.429,
+      "difficulty": "Easy",
+      "question_type": "Factual"
+    },
+    {
+      "question": "Machine learning focuses on the idea that machines should be able to learn and adapt through experience without being explicitly programmed for what?",
+      "options": {
+        "A": "One",
+        "B": "every task",
+        "C": "Alan Turing"
+      },
+      "correct_answer": "B",
+      "explanation": "The correct answer is 'every task' based on the context provided.",
+      "confidence": 0.978,
+      "difficulty": "Easy",
+      "question_type": "General"
+    }
+  ]
+}
