@@ -37,7 +37,7 @@ export default function VideoInput() {
     }
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-xl">
-      <h2 className="text-xl font-bold mb-4 text-gray-800">Upload Lecture Video</h2>
+      <h2 className="text-xl font-bold mb-4 text-gray-600">Upload Lecture Video</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
 
         {/* Conditional Input */}
