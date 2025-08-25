@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function VideoInput() {
   const [videoLink, setVideoLink] = useState("");
   const [videoFile, setVideoFile] = useState(null);
-  const [transcript,setTranscript] = useState("");
+  const [transcript, setTranscript] = useState("");
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -26,55 +26,109 @@ export default function VideoInput() {
       alert("Please provide a YouTube link or upload a video file");
       return;
     }
-  
 
     // Send to backend
     console.log("Video Link:", videoLink);
     console.log("Video File:", videoFile);
   };
-    const handleTranscriptChange = (e) => {
-        setTranscript(e.target.value);
-    }
+
+  const handleTranscriptChange = (e) => {
+    setTranscript(e.target.value);
+  };
+
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-xl">
-      <h2 className="text-xl font-bold mb-4 text-gray-800">Upload Lecture Video</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div
+      className="max-w-lg mx-auto p-8 shadow-xl rounded-2xl border"
+      style={{
+        background: "linear-gradient(to bottom right, #F5E6CC, #FAF1E3)",
+        borderColor: "#E6CFA7",
+      }}
+    >
+      <h2
+        className="text-2xl font-extrabold mb-6 text-center"
+        style={{ color: "#3A4B41" }}
+      >
+        🎥 Upload Lecture Video
+      </h2>
 
-        {/* Conditional Input */}
-              <div>
-            <label className="block text-gray-700 mb-2">Transcript</label>
-            <input
-              type="text"
-              placeholder="transcript..."
-              value={transcript}
-              onChange={handleTranscriptChange}
-              className="text-black text-sm w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Transcript Input */}
+        <div>
+          <label
+            className="block font-medium mb-2"
+            style={{ color: "#3A4B41" }}
+          >
+            Transcript
+          </label>
+          <textarea
+            placeholder="Enter transcript..."
+            value={transcript}
+            onChange={handleTranscriptChange}
+            rows={3}
+            className="text-sm w-full p-3 border rounded-lg focus:outline-none focus:ring-2 resize-none"
+            style={{
+              borderColor: "#E6CFA7",
+              color: "#3A4B41",
+              backgroundColor: "#FAF1E3",
+              focusRingColor: "#3A4B41",
+            }}
+          />
+        </div>
 
-          <div>
-            <label className="block text-gray-700 mb-2">YouTube Link</label>
-            <input
-              type="url"
-              placeholder="https://youtube.com/..."
-              value={videoLink}
-              onChange={handleLinkChange}
-              className="text-blue-500 text-sm w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-        
-  
-    
+        {/* File Upload */}
+        <div>
+          <label
+            className="block font-medium mb-2"
+            style={{ color: "#3A4B41" }}
+          >
+            Or Upload File
+          </label>
+          <input
+            type="file"
+            accept="video/*"
+            onChange={handleFileChange}
+            className="block w-full text-sm border rounded-lg cursor-pointer file:mr-4 file:py-2 file:px-4 
+            file:rounded-lg file:border-0 file:text-sm file:font-semibold"
+            style={{
+              borderColor: "#E6CFA7",
+              color: "#3A4B41",
+              backgroundColor: "#F5E6CC",
+            }}
+          />
+        </div>
 
-        {/* Switch Button */}
-       
+        {/* YouTube Link Input */}
+        <div>
+          <label
+            className="block font-medium mb-2"
+            style={{ color: "#3A4B41" }}
+          >
+            YouTube Link
+          </label>
+          <input
+            type="url"
+            placeholder="https://youtube.com/..."
+            value={videoLink}
+            onChange={handleLinkChange}
+            className="text-sm w-full p-3 border rounded-lg focus:outline-none focus:ring-2"
+            style={{
+              borderColor: "#E6CFA7",
+              color: "#3A4B41",
+              backgroundColor: "#FAF1E3",
+            }}
+          />
+        </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+          className="w-full py-3 rounded-xl font-semibold shadow-md transition-all duration-300"
+          style={{
+            backgroundColor: "#3A4B41",
+            color: "#F5E6CC",
+          }}
         >
-          Process Video
+          🚀 Process Video
         </button>
       </form>
     </div>
