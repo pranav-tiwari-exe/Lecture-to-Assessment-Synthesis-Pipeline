@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-// import VideoInput from '../components/VideoInput'
 import Header from '../components/Header'
 
 const HomePage = () => {
