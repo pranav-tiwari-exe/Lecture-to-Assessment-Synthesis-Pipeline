@@ -22,8 +22,6 @@ const ThemeToggler = () => {
                 <Image src={assets.darkMode} alt='dark_mode_icon' width={26}/>
             </button>)
     )
-
-
 }
 
 export default ThemeToggler
