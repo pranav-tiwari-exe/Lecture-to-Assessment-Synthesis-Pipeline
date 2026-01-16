@@ -18,14 +18,14 @@ export async function saveMCQs(data) {
     };
     
     const result = await collection.insertOne(document);
-    console.log(`✅ Saved ${data.mcqs?.length || 0} MCQs to MongoDB with ID: ${result.insertedId}`);
+    console.log(`Saved ${data.mcqs?.length || 0} MCQs to MongoDB with ID: ${result.insertedId}`);
     
     return {
       id: result.insertedId,
       ...document
     };
   } catch (error) {
-    console.error('❌ Error saving MCQs to MongoDB:', error);
+    console.error('Error saving MCQs to MongoDB:', error);
     throw error;
   }
 }
@@ -38,7 +38,7 @@ export async function getMCQsByVideoId(videoId) {
     const result = await collection.findOne({ videoId });
     return result;
   } catch (error) {
-    console.error('❌ Error fetching MCQs from MongoDB:', error);
+    console.error('Error fetching MCQs from MongoDB:', error);
     throw error;
   }
 }
@@ -56,7 +56,7 @@ export async function getAllMCQs(limit = 50) {
     
     return results;
   } catch (error) {
-    console.error('❌ Error fetching all MCQs from MongoDB:', error);
+    console.error('Error fetching all MCQs from MongoDB:', error);
     throw error;
   }
 }

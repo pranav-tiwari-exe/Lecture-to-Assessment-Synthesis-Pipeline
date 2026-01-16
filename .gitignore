@@ -1,0 +1,12 @@
+# Ignore env
+.env
+
+# Ignore markdown docs
+README.md
+CHANGES.md
+INTERVIEW_GUIDE.md
+QUICK_REFERENCE.md
+
+# Ignore scripts
+start-dev.bat
+start-dev.sh

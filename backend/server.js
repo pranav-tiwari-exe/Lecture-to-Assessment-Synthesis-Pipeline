@@ -60,7 +60,7 @@ app.post("/generate", async (req, res) => {
           });
         }
 
-        console.log(`📹 Extracting transcript for video ID: ${videoId}`);
+        console.log(`Extracting transcript for video ID: ${videoId}`);
         
         // Fetch transcript using youtube-transcript library
         const transcriptData = await YoutubeTranscript.fetchTranscript(videoId);
@@ -73,12 +73,12 @@ app.post("/generate", async (req, res) => {
           });
         }
 
-        console.log(`✅ Transcript extracted (${transcript.length} characters)`);
+        console.log(`Transcript extracted (${transcript.length} characters)`);
         
         // Check if MCQs already exist for this video
         const existingMCQs = await getMCQsByVideoId(videoId);
         if (existingMCQs) {
-          console.log(`📋 Found existing MCQs for video ${videoId}`);
+          console.log(`Found existing MCQs for video ${videoId}`);
           return res.json({
             success: true,
             data: {
@@ -91,7 +91,7 @@ app.post("/generate", async (req, res) => {
           });
         }
       } catch (error) {
-        console.error("❌ Error extracting transcript:", error.message);
+        console.error("Error extracting transcript:", error.message);
         return res.status(400).json({ 
           success: false, 
           error: `Failed to extract transcript: ${error.message}` 
@@ -107,7 +107,7 @@ app.post("/generate", async (req, res) => {
     }
 
     // Call ML microservice to generate MCQs
-    console.log(`🤖 Sending transcript to ML service for MCQ generation...`);
+    console.log(`Sending transcript to ML service for MCQ generation...`);
     
     try {
       const mlResponse = await axios.post(`${ML_SERVICE_URL}/generate_mcqs`, {
@@ -127,7 +127,7 @@ app.post("/generate", async (req, res) => {
         });
       }
 
-      console.log(`✅ Generated ${mcqsData.mcq_count} MCQs from ML service`);
+      console.log(`Generated ${mcqsData.mcq_count} MCQs from ML service`);
 
       // Store MCQs in MongoDB
       let savedData = null;
@@ -139,9 +139,9 @@ app.post("/generate", async (req, res) => {
             transcript: transcript,
             mcqs: mcqsData.mcqs
           });
-          console.log(`💾 MCQs saved to MongoDB`);
+          console.log(`MCQs saved to MongoDB`);
         } catch (dbError) {
-          console.error("⚠️ Warning: Failed to save to MongoDB:", dbError.message);
+          console.error("Warning: Failed to save to MongoDB:", dbError.message);
           // Continue even if DB save fails
         }
       }
@@ -159,7 +159,7 @@ app.post("/generate", async (req, res) => {
         }
       });
     } catch (mlError) {
-      console.error("❌ ML service error:", mlError.message);
+      console.error("ML service error:", mlError.message);
       
       if (mlError.code === 'ECONNREFUSED') {
         return res.status(503).json({ 
@@ -201,7 +201,7 @@ app.get("/health", (req, res) => {
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Backend running at http://localhost:${PORT}`);
-  console.log(`📊 MongoDB: ${process.env.MONGODB_URI || 'mongodb://localhost:27017'}`);
-  console.log(`🤖 ML Service: ${ML_SERVICE_URL}`);
+  console.log(`Backend running at http://localhost:${PORT}`);
+  console.log(`MongoDB: ${process.env.MONGODB_URI || 'mongodb://localhost:27017'}`);
+  console.log(`ML Service: ${ML_SERVICE_URL}`);
 });

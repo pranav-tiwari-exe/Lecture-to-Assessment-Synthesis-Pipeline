@@ -70,7 +70,7 @@ class TranscriptQAGenerator:
             nltk.download('punkt')
         
         self.is_loaded = True
-        print("✅ All enhanced models initialized successfully!")
+        print("All enhanced models initialized successfully!")
     
     def clean_transcript(self, transcript: str) -> str:
         """
@@ -696,5 +696,5 @@ class TranscriptQAGenerator:
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(export_data, f, indent=2, ensure_ascii=False)
         
-        logging.info(f"✅ MCQs exported to {filename}")
+        logging.info(f"MCQs exported to {filename}")
         return filename

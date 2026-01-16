@@ -18,19 +18,19 @@ def print_separator(title=""):
 
 def display_mcq(mcq, index):
     """Display a single MCQ in a nice format"""
-    print(f"\n📝 MCQ #{index}")
+    print(f"\n MCQ #{index}")
     print(f"Question: {mcq['question']}")
     print("\nOptions:")
     
     for option_key, option_value in mcq['options'].items():
         # Add checkmark for correct answer
-        marker = "✅" if option_key == mcq['correct_answer'] else "  "
+        marker = "✓" if option_key == mcq['correct_answer'] else "  "
         print(f"  {marker} {option_key}) {option_value}")
     
-    print(f"\n💡 Explanation: {mcq['explanation']}")
-    print(f"📊 Confidence: {mcq['confidence']}")
-    print(f"🎯 Difficulty: {mcq['difficulty']}")
-    print(f"🔍 Type: {mcq['question_type']}")
+    print(f"\n Explanation: {mcq['explanation']}")
+    print(f" Confidence: {mcq['confidence']}")
+    print(f" Difficulty: {mcq['difficulty']}")
+    print(f" Type: {mcq['question_type']}")
     print_separator()
 
 def display_statistics(stats):
@@ -40,12 +40,12 @@ def display_statistics(stats):
     print(f"Average Confidence: {stats['average_confidence']}")
     print(f"Confidence Range: {stats['min_confidence']} - {stats['max_confidence']}")
     
-    print("\n📊 Difficulty Distribution:")
+    print("\n Difficulty Distribution:")
     for diff, count in stats['difficulty_distribution'].items():
         percentage = (count / stats['total_mcqs']) * 100 if stats['total_mcqs'] > 0 else 0
         print(f"  {diff}: {count} ({percentage:.1f}%)")
     
-    print("\n🔍 Question Type Distribution:")
+    print("\n Question Type Distribution:")
     for qtype, count in stats['question_type_distribution'].items():
         percentage = (count / stats['total_mcqs']) * 100 if stats['total_mcqs'] > 0 else 0
         print(f"  {qtype}: {count} ({percentage:.1f}%)")
@@ -56,8 +56,8 @@ def run_enhanced_test():
     Test the enhanced MCQ generator with improved features
     """
     print_separator("ENHANCED MCQ GENERATION TEST")
-    print("🚀 Testing the Enhanced TranscriptQAGenerator")
-    print("✨ New Features:")
+    print("   Testing the Enhanced TranscriptQAGenerator")
+    print("    New Features:")
     print("   - T5-base model for better question quality")
     print("   - RoBERTa-based QA for enhanced validation")
     print("   - Semantic chunking for better context")
@@ -65,20 +65,20 @@ def run_enhanced_test():
     print("   - Advanced preprocessing and cleaning")
     
     # 1. Initialize the enhanced generator
-    print("\n🔄 Initializing Enhanced MCQ Generator...")
+    print("\n  Initializing Enhanced MCQ Generator...")
     start_time = time.time()
     
     try:
         qa_generator = TranscriptQAGenerator()
     except Exception as e:
-        print(f"❌ Error during initialization: {e}")
-        print("💡 Make sure you have installed all required dependencies:")
+        print(f" Error during initialization: {e}")
+        print(" Make sure you have installed all required dependencies:")
         print("   pip install torch transformers sentence-transformers spacy nltk")
         print("   python -m spacy download en_core_web_sm")
         return
     
     init_time = time.time() - start_time
-    print(f"✅ Enhanced models loaded successfully in {init_time:.2f} seconds!")
+    print(f" Enhanced models loaded successfully in {init_time:.2f} seconds!")
     
     # 2. Enhanced sample transcript with more complex content
     sample_transcript = """
@@ -114,8 +114,8 @@ This transcript covers diverse topics, speakers, informal speech, technical lang
     """
     
     # 3. Generate MCQs with enhanced settings
-    print("\n🎯 Generating MCQs from enhanced transcript...")
-    print(f"📄 Transcript length: {len(sample_transcript)} characters")
+    print("\  Generating MCQs from enhanced transcript...")
+    print(f"  Transcript length: {len(sample_transcript)} characters")
     
     start_time = time.time()
     
@@ -127,15 +127,15 @@ This transcript covers diverse topics, speakers, informal speech, technical lang
             min_distractors=2        # Require at least 2 distractors
         )
     except Exception as e:
-        print(f"❌ Error during MCQ generation: {e}")
+        print(f"  Error during MCQ generation: {e}")
         return
     
     gen_time = time.time() - start_time
-    print(f"✅ Enhanced generation complete in {gen_time:.2f} seconds!")
+    print(f" Enhanced generation complete in {gen_time:.2f} seconds!")
     
     # 4. Display results with enhanced formatting
     if mcqs:
-        print(f"\n🎉 Successfully generated {len(mcqs)} high-quality MCQs!")
+        print(f"\n Successfully generated {len(mcqs)} high-quality MCQs!")
         
         # Display each MCQ
         for i, mcq in enumerate(mcqs, 1):
@@ -146,51 +146,51 @@ This transcript covers diverse topics, speakers, informal speech, technical lang
         display_statistics(stats)
         
         # 6. Export results with metadata
-        print("\n💾 Exporting results...")
+        print("\n  Exporting results...")
         try:
             filename = qa_generator.export_mcqs(mcqs)
-            print(f"✅ MCQs exported to: {filename}")
-            print("📁 The exported file includes:")
+            print(f" MCQs exported to: {filename}")
+            print(" The exported file includes:")
             print("   - All generated MCQs")
             print("   - Generation statistics") 
             print("   - Metadata about improvements")
             print("   - Timestamp and version info")
         except Exception as e:
-            print(f"⚠️ Error exporting MCQs: {e}")
+            print(f" Error exporting MCQs: {e}")
         
         # 7. Performance summary
         print_separator("PERFORMANCE SUMMARY")
-        print(f"⏱️  Total Time: {init_time + gen_time:.2f} seconds")
-        print(f"🏗️  Initialization: {init_time:.2f}s")
-        print(f"⚡ Generation: {gen_time:.2f}s")
-        print(f"📈 MCQs per second: {len(mcqs)/gen_time:.2f}")
-        print(f"🎯 Success Rate: {len(mcqs)}/8 requested")
+        print(f" Total Time: {init_time + gen_time:.2f} seconds")
+        print(f"  Initialization: {init_time:.2f}s")
+        print(f" Generation: {gen_time:.2f}s")
+        print(f" MCQs per second: {len(mcqs)/gen_time:.2f}")
+        print(f" Success Rate: {len(mcqs)}/8 requested")
         
         # 8. Quality indicators
         avg_confidence = stats['average_confidence']
         if avg_confidence >= 0.7:
-            quality_rating = "Excellent 🌟"
+            quality_rating = "Excellent "
         elif avg_confidence >= 0.5:
-            quality_rating = "Good ✅"
+            quality_rating = "Good "
         elif avg_confidence >= 0.4:
-            quality_rating = "Fair ⚠️"
+            quality_rating = "Fair "
         else:
-            quality_rating = "Needs Improvement 🔧"
+            quality_rating = "Needs Improvement "
             
-        print(f"🏆 Quality Rating: {quality_rating}")
-        print(f"📊 Average Confidence: {avg_confidence}")
+        print(f" Quality Rating: {quality_rating}")
+        print(f" Average Confidence: {avg_confidence}")
         
     else:
-        print("❌ No MCQs were generated.")
-        print("💡 This could be due to:")
+        print(" No MCQs were generated.")
+        print(" This could be due to:")
         print("   - Transcript too short or lacks factual content")
         print("   - Strict quality filtering removing low-quality questions")
         print("   - Model initialization issues")
         print("   - Try with a longer, more detailed transcript")
     
     print_separator("TEST COMPLETE")
-    print("🎯 Enhanced MCQ Generator Test Finished!")
-    print("📚 For more information, check the generated JSON export file")
+    print(" Enhanced MCQ Generator Test Finished!")
+    print(" For more information, check the generated JSON export file")
 
 def run_comparison_test():
     """
@@ -205,27 +205,27 @@ def run_comparison_test():
     paradigms including procedural, object-oriented, and functional programming.
     """
     
-    print("🔍 Testing with shorter transcript...")
+    print(" Testing with shorter transcript...")
     
     try:
         qa_generator = TranscriptQAGenerator()
         mcqs = qa_generator.generate_qa_pairs(short_transcript, max_mcqs=3)
         
         if mcqs:
-            print(f"✅ Generated {len(mcqs)} MCQs from short transcript!")
+            print(f" Generated {len(mcqs)} MCQs from short transcript!")
             for i, mcq in enumerate(mcqs, 1):
                 print(f"\n{i}. {mcq['question']}")
                 correct_key = mcq['correct_answer']
                 print(f"   Answer: {mcq['options'][correct_key]} (Confidence: {mcq['confidence']})")
         else:
-            print("❌ No MCQs generated from short transcript")
+            print(" No MCQs generated from short transcript")
             
     except Exception as e:
-        print(f"❌ Comparison test failed: {e}")
+        print(f" Comparison test failed: {e}")
 
 def main():
     """Main test function"""
-    print("🚀 Enhanced MCQ Generator Test Suite")
+    print(" Enhanced MCQ Generator Test Suite")
     print("Choose test type:")
     print("1. Full Enhanced Test (recommended)")
     print("2. Quick Comparison Test")

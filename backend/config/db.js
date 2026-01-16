@@ -16,7 +16,7 @@ export async function connectDB() {
     await client.connect();
     db = client.db(DB_NAME);
     
-    console.log('✅ Connected to MongoDB');
+    console.log('Connected to MongoDB');
     return { client, db };
   } catch (error) {
     console.error('❌ MongoDB connection error:', error);
