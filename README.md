@@ -1,6 +1,6 @@
-# RPKP - YouTube MCQ Generator
+# Lecture-to-Assessment Synthesis Pipeline (RPKP)
 
-A full-stack application that generates Multiple Choice Questions (MCQs) from YouTube video transcripts using advanced AI/ML models.
+A full-stack application that automatically generates Multiple Choice Questions (MCQs) from YouTube video transcripts using advanced AI/ML models. This project reduces manual effort for educators by automating assessment generation and enabling scalable, intelligent learning workflows.
 
 ## 🏗️ Architecture
 
@@ -16,11 +16,13 @@ Frontend (Next.js) → Backend (Express.js) → ML Service (FastAPI) → MongoDB
 ## ✨ Features
 
 - 📹 Extract transcripts from YouTube videos
-- 🤖 Generate high-quality MCQs using AI models
+- 🤖 Generate high-quality MCQs using AI models (T5, RoBERTa, Sentence Transformers)
 - 💾 Store MCQs in MongoDB with caching
 - 🎨 Modern, responsive UI with dark mode support
 - ⚡ Fast generation with semantic similarity
 - 📊 Display results with explanations and difficulty levels
+- 🔄 Modular and extensible architecture
+- 🧠 NLP-based text processing and analysis
 
 ## 🚀 Quick Start
 
@@ -34,8 +36,8 @@ Frontend (Next.js) → Backend (Express.js) → ML Service (FastAPI) → MongoDB
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd RPKP
+git clone https://github.com/pranav-tiwari-exe/Lecture-to-Assessment-Synthesis-Pipeline.git
+cd Lecture-to-Assessment-Synthesis-Pipeline
 ```
 
 ### 2. Backend Setup
@@ -122,7 +124,7 @@ NEXT_PUBLIC_API_URL=http://localhost:5000
 ## 📁 Project Structure
 
 ```
-RPKP/
+Lecture-to-Assessment-Synthesis-Pipeline/
 ├── frontend/          # Next.js frontend application
 │   ├── app/          # Next.js app router pages
 │   ├── components/   # React components
@@ -189,9 +191,45 @@ RPKP/
 - Check if backend is running
 - Verify API URL in environment variables
 
+## 👥 Team Contribution
+
+This project was developed as part of a collaborative team effort. Contributions include:
+
+- **Backend Integration**: Express.js API development, MongoDB integration, YouTube transcript extraction
+- **ML Pipeline**: NLP model integration (T5, RoBERTa), question generation, distractor creation
+- **Frontend Development**: Next.js UI, user interface design, API integration
+- **System Architecture**: Microservices design, service communication, error handling
+- **Testing & Debugging**: End-to-end testing, bug fixes, performance optimization
+
+This experience provided hands-on experience with:
+- NLP-based applications and transformer models
+- Multi-module project architecture
+- Backend–ML integration
+- Collaborative development workflows
+
+## 🎓 Learning Outcomes
+
+- Hands-on experience with NLP-based applications
+- Exposure to multi-module project architecture
+- Practical understanding of backend–ML integration
+- Experience working in a collaborative development environment
+- Full-stack development with modern technologies
+- AI/ML model integration and optimization
+
+## 🚀 Future Enhancements
+
+- Improve question quality using advanced NLP or transformer-based models
+- Add support for audio-to-text processing
+- Introduce dashboards for instructors and students
+- Enhance evaluation metrics for generated assessments
+- Multi-language support
+- Batch processing capabilities
+- Export features (PDF, CSV)
+- User authentication and personalization
+
 ## 📄 License
 
-This project is open source and available under the MIT License.
+This project is open source and available under the MIT License. Intended for educational and academic purposes.
 
 ## 🤝 Contributing
 
