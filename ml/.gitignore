@@ -1,0 +1,163 @@
+# ML Repository .gitignore
+# This file excludes files that should not be committed to version control:
+# - Python bytecode and cache files
+# - Virtual environments
+# - ML model files (too large, download from Hugging Face)
+# - Generated outputs (MCQ JSON files)
+# - IDE and OS-specific files
+# - Environment variables and secrets
+# - Log files and temporary files
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+virtualenv/
+
+# PyTorch / ML Models
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.pb
+*.onnx
+*.tflite
+models/
+checkpoints/
+weights/
+saved_models/
+.pytorch/
+
+# Hugging Face Cache
+.cache/
+.huggingface/
+transformers_cache/
+hf_cache/
+
+# Model Downloads (from transformers library)
+models/
+*.bin
+*.safetensors
+
+# spaCy Models (downloaded models)
+*.whl
+
+# Generated MCQs and Outputs
+scripts/enhanced_mcqs_*.json
+scripts/*_mcqs_*.json
+scripts/*mcqs*.json
+# Note: Generated MCQ JSON files are ignored
+# If you need to commit example/test JSON files, add exceptions like:
+# !scripts/example_mcqs.json
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Data Files
+data/
+datasets/
+*.csv
+*.tsv
+*.parquet
+*.arrow
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
+
+# Profiling
+*.prof
+*.lprof
+
+# Large Files
+*.zip
+*.tar.gz
+*.rar
+
+# Specific to this project
+test_outputs/
+results/
+outputs/
+generated_questions/
+
+*.md
+
+
+# Keep example files if needed (uncomment to ignore)
+# examples/
+# samples/

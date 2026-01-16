@@ -1,13 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from 'framer-motion';
+import { generateMCQs } from '@/lib/api';
 
 export default function VideoInput() {
+  const router = useRouter();
   const [videoLink, setVideoLink] = useState("");
   const [videoFile, setVideoFile] = useState(null);
   const [transcript, setTranscript] = useState("");
-  const [activeInput, setActiveInput] = useState("transcript");
+  const [activeInput, setActiveInput] = useState("link");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -32,17 +37,50 @@ export default function VideoInput() {
     setActiveInput("transcript");
   }; 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
 
     if (!videoLink && !videoFile && !transcript) {
-      alert("Please provide a transcript, YouTube link, or upload a video file");
+      setError("Please provide a transcript, YouTube link, or upload a video file");
       return;
     }
 
-    console.log("Video Link:", videoLink);
-    console.log("Video File:", videoFile);
-    console.log("Transcript:", transcript);
+    setLoading(true);
+
+    try {
+      const payload = {
+        numQuestions: 5,
+      };
+
+      if (videoLink) {
+        payload.youtubeUrl = videoLink;
+      } else if (transcript) {
+        payload.text = transcript;
+      } else if (videoFile) {
+        // For now, file upload is not implemented in backend
+        setError("File upload is not yet supported. Please use YouTube link or paste transcript.");
+        setLoading(false);
+        return;
+      }
+
+      const response = await generateMCQs(payload);
+
+      if (response.success && response.data) {
+        // Store MCQs in sessionStorage and navigate to results
+        // Backend returns { success: true, data: { mcqs: [...], ... } }
+        // response.data is the whole response, response.data.data is the inner data object
+        sessionStorage.setItem('mcqData', JSON.stringify(response.data));
+        router.push('/result');
+      } else {
+        setError(response.error || 'Failed to generate MCQs');
+      }
+    } catch (err) {
+      console.error('Error generating MCQs:', err);
+      setError(err.message || 'An error occurred while generating MCQs');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -169,16 +207,32 @@ export default function VideoInput() {
             )}
           </motion.div>
 
+          {/* Error Message */}
+          {error && (
+            <div className="px-6 pb-4">
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                {error}
+              </div>
+            </div>
+          )}
+
           {/* Submit Button */}
           <div className="px-6 pb-6">
             <motion.button
               type="submit"
-              className="w-full bg-black text-white py-4 rounded-xl font-semibold text-lg shadow-md hover:bg-neutral-800 transition-all duration-300 flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              disabled={!transcript && !videoFile && !videoLink}
+              className="w-full bg-black text-white py-4 rounded-xl font-semibold text-lg shadow-md hover:bg-neutral-800 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              whileHover={{ scale: loading ? 1 : 1.02 }}
+              whileTap={{ scale: loading ? 1 : 0.98 }}
+              disabled={(!transcript && !videoFile && !videoLink) || loading}
             >
-              <span>🚀 Process Content</span>
+              {loading ? (
+                <>
+                  <span className="animate-spin">⏳</span>
+                  <span>Processing...</span>
+                </>
+              ) : (
+                <span>🚀 Process Content</span>
+              )}
             </motion.button>
           </div>
         </form>

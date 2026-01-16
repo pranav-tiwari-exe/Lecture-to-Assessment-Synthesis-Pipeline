@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from youtube_transcript_api import YouTubeTranscriptApi, NoTranscriptFound, TranscriptsDisabled
 import re
@@ -6,6 +7,15 @@ from urllib.parse import urlparse, parse_qs
 from scripts.TranscriptQAGenerator import TranscriptQAGenerator
 
 app = FastAPI()
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class LinkRequest(BaseModel):
     link: str
@@ -71,21 +81,33 @@ def extract_transcript(request: LinkRequest):
             detail=f"An error occurred while fetching the transcript: {str(e)}"
         )
 
+@app.get("/")
+def root():
+    return {"message": "ML Service is running", "status": "ok"}
+
+@app.get("/health")
+def health():
+    return {"status": "healthy", "service": "ML Service"}
+
 @app.post("/generate_mcqs")
 def generate_mcqs(request: TranscriptRequest):
     if not request.transcript or len(request.transcript.strip()) == 0:
         raise HTTPException(status_code=400, detail="Transcript text is required.")
 
     try:
-        mcqs = TranscriptQAGenerator().generate_qa_pairs(
+        print(f"Generating MCQs from transcript ({len(request.transcript)} characters)...")
+        generator = TranscriptQAGenerator()
+        mcqs = generator.generate_qa_pairs(
             transcript=request.transcript,
             max_mcqs=request.max_mcqs,
             min_distractors=request.min_distractors
         )
+        print(f"Successfully generated {len(mcqs)} MCQs")
         return {
             "success": True,
             "mcq_count": len(mcqs),
             "mcqs": mcqs
         }
     except Exception as e:
+        print(f"Error generating MCQs: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error generating MCQs: {str(e)}")
