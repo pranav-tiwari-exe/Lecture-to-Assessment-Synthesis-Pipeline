@@ -8,7 +8,7 @@ import { generateMCQs } from '@/lib/api';
 export default function VideoInput() {
   const router = useRouter();
   const [videoLink, setVideoLink] = useState("");
-  const [videoFile, setVideoFile] = useState(null);
+  const [file, setVideoFile] = useState(null);
   const [transcript, setTranscript] = useState("");
   const [activeInput, setActiveInput] = useState("link");
   const [loading, setLoading] = useState(false);
@@ -35,13 +35,13 @@ export default function VideoInput() {
     setVideoFile(null);
     setVideoLink(null);
     setActiveInput("transcript");
-  }; 
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
-    if (!videoLink && !videoFile && !transcript) {
+    if (!videoLink && !file && !transcript) {
       setError("Please provide a transcript, YouTube link, or upload a video file");
       return;
     }
@@ -50,14 +50,14 @@ export default function VideoInput() {
 
     try {
       const payload = {
-        numQuestions: 5,
+        questions: 5,
       };
 
       if (videoLink) {
         payload.youtubeUrl = videoLink;
       } else if (transcript) {
-        payload.text = transcript;
-      } else if (videoFile) {
+        payload.transcript = transcript;
+      } else if (File) {
         // For now, file upload is not implemented in backend
         setError("File upload is not yet supported. Please use YouTube link or paste transcript.");
         setLoading(false);
@@ -66,11 +66,9 @@ export default function VideoInput() {
 
       const response = await generateMCQs(payload);
 
-      if (response.success && response.data) {
-        // Store MCQs in sessionStorage and navigate to results
-        // Backend returns { success: true, data: { mcqs: [...], ... } }
-        // response.data is the whole response, response.data.data is the inner data object
-        sessionStorage.setItem('mcqData', JSON.stringify(response.data));
+      if (response && response.response) {
+        // Store the entire response directly
+        sessionStorage.setItem('mcqData', JSON.stringify(response));
         router.push('/result');
       } else {
         setError(response.error || 'Failed to generate MCQs');
@@ -84,14 +82,14 @@ export default function VideoInput() {
   };
 
   return (
-    <motion.div 
+    <motion.div
       className="max-w-4xl mx-auto px-4 py-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
       {/* Header */}
-      <motion.div 
+      <motion.div
         className="text-center mb-12"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -106,7 +104,7 @@ export default function VideoInput() {
       </motion.div>
 
       {/* Main Input Container */}
-      <motion.div 
+      <motion.div
         className="bg-white shadow-lg border-0 rounded-xl border-neutral-200 overflow-hidden"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -117,33 +115,30 @@ export default function VideoInput() {
           <button
             type="button"
             onClick={() => setActiveInput("transcript")}
-            className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${
-              activeInput === "transcript"
+            className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${activeInput === "transcript"
                 ? "bg-black text-white"
                 : "text-neutral-600 hover:text-black hover:bg-neutral-50"
-            }`}
+              }`}
           >
             📝 Transcript
           </button>
           <button
             type="button"
             onClick={() => setActiveInput("file")}
-            className={`flex-1 px-6 py-4 text-sm font-medium transition-colors border-x border-neutral-200 ${
-              activeInput === "file"
+            className={`flex-1 px-6 py-4 text-sm font-medium transition-colors border-x border-neutral-200 ${activeInput === "file"
                 ? "bg-black text-white"
                 : "text-neutral-600 hover:text-black hover:bg-neutral-50"
-            }`}
+              }`}
           >
             📁 Upload File
           </button>
           <button
             type="button"
             onClick={() => setActiveInput("link")}
-            className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${
-              activeInput === "link"
+            className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${activeInput === "link"
                 ? "bg-black text-white"
                 : "text-neutral-600 hover:text-black hover:bg-neutral-50"
-            }`}
+              }`}
           >
             🔗 YouTube Link
           </button>
@@ -151,7 +146,7 @@ export default function VideoInput() {
 
         {/* Input Area */}
         <form onSubmit={handleSubmit} className="relative text-zinc-600">
-          <motion.div 
+          <motion.div
             className="p-6"
             key={activeInput}
             initial={{ opacity: 0, x: 20 }}

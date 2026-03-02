@@ -10,3 +10,5 @@ QUICK_REFERENCE.md
 # Ignore scripts
 start-dev.bat
 start-dev.sh
+
+backend/src/main/resources/application.properties
