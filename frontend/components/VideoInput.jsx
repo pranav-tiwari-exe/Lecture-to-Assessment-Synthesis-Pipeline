@@ -178,7 +178,7 @@ export default function VideoInput() {
                   <div className="flex flex-col items-center">
                     <div className="text-4xl mb-4">📝</div>
                     <p className="text-lg text-neutral-600 mb-2">
-                      {videoFile ? videoFile.name : "Click to upload a file"}
+                      {file ? file.name : "Click to upload a file"}
                     </p>
                     <p className="text-sm text-neutral-400">
                       Supports *.pdf and *.txt formats
@@ -218,7 +218,7 @@ export default function VideoInput() {
               className="w-full bg-black text-white py-4 rounded-xl font-semibold text-lg shadow-md hover:bg-neutral-800 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               whileHover={{ scale: loading ? 1 : 1.02 }}
               whileTap={{ scale: loading ? 1 : 0.98 }}
-              disabled={(!transcript && !videoFile && !videoLink) || loading}
+              disabled={(!transcript && !file && !videoLink) || loading}
             >
               {loading ? (
                 <>
