@@ -1,5 +1,4 @@
 # Ignore env
-.env
 
 # Ignore markdown docs
 README.md
@@ -12,3 +11,5 @@ start-dev.bat
 start-dev.sh
 
 backend/src/main/resources/application.properties
+config.bat
+node_modules
